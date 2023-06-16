@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import Title from '../components/UI/Title'
 import Colors from '../constants/colors'
 
@@ -12,6 +12,7 @@ export default function GameOverScreen() {
           style={styles.image}
         />
       </View>
+      <Text>Number of rounds: </Text>
     </View>
   )
 }
