@@ -5,12 +5,19 @@ import { useState } from 'react'
 import GameScreen from './screens/GameScreen'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Colors from './constants/colors'
+import GameOverScreen from './screens/GameOverScreen'
 
 export default function App() {
   const [userNumber, setUserNumber] = useState(null)
+  const [gameIsOver, setGameIsOver] = useState(true)
 
   const pickedNumberHandler = (pickedNumber) => {
     setUserNumber(pickedNumber)
+    setGameIsOver(false)
+  }
+
+  function gameOverHandler() {
+    setGameIsOver(true)
   }
 
   let screen = (
@@ -18,7 +25,19 @@ export default function App() {
   )
 
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} />
+    screen = (
+      <GameScreen
+        userNumber={userNumber}
+        onGameOver={gameOverHandler}
+      />
+    )
+  }
+
+  if (gameIsOver && userNumber) {
+    screen = (
+      <GameOverScreen />
+      // <GameOverScreen onRestart={restartGameHandler} />
+    )
   }
 
   return (
