@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Colors from '../../constants/colors'
 
 export default function Card({ children }) {
@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   card: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 100,
+    marginTop: 50,
     marginHorizontal: 24,
     padding: 16,
     backgroundColor: Colors.primary800,
