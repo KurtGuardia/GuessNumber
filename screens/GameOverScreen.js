@@ -38,7 +38,7 @@ export default function GameOverScreen({
     <ScrollView style={styles.screen}>
       <View style={styles.rootContainer}>
         <Title>Game Over!</Title>
-        <View style={[styles.imageContainer, imageSize]}>
+        <View style={[styles.imageContainer, imageStyle]}>
           <Image
             source={require('../assets/images/success.png')}
             style={styles.image}
