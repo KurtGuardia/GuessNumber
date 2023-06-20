@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  useWindowDimensions,
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Title from '../components/UI/Title'
@@ -41,6 +42,7 @@ export default function GameScreen({
   const [guessRounds, setGuessRounds] = useState([
     initialGuess,
   ])
+  const { width, height } = useWindowDimensions()
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -86,9 +88,8 @@ export default function GameScreen({
 
   const guessRoundsListLength = guessRounds.length
 
-  return (
-    <View style={styles.screen}>
-      <Title>Opponent's Guess</Title>
+  let content = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
         <InstructionGame style={styles.instructionText}>
@@ -126,6 +127,52 @@ export default function GameScreen({
           </View>
         </View>
       </Card>
+    </>
+  )
+
+  if (width > 500) {
+    content = (
+      <>
+        <View style={styles.buttonsContainerWide}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton
+              onPress={nextGuessHandler.bind(this, 'lower')}
+            >
+              {
+                <Ionicons
+                  name='md-remove'
+                  size={24}
+                  color='white'
+                />
+              }
+            </PrimaryButton>
+          </View>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton
+              onPress={nextGuessHandler.bind(
+                this,
+                'greater',
+              )}
+            >
+              {
+                <Ionicons
+                  name='md-add'
+                  size={24}
+                  color='white'
+                />
+              }
+            </PrimaryButton>
+          </View>
+        </View>
+      </>
+    )
+  }
+
+  return (
+    <View style={styles.screen}>
+      <Title>Opponent's Guess</Title>
+      {content}
       <View style={styles.listContainer}>
         {
           <FlatList
@@ -152,10 +199,6 @@ const styles = StyleSheet.create({
     padding: 24,
     alignItems: 'center',
   },
-  listContainer: {
-    flex: 1,
-    padding: 16,
-  },
   instructionText: {
     marginBottom: 12,
   },
@@ -164,5 +207,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  buttonsContainerWide: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  listContainer: {
+    flex: 1,
+    padding: 16,
   },
 })
