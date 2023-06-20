@@ -3,12 +3,22 @@ import {
   Text,
   StyleSheet,
   Dimensions,
+  useWindowDimensions,
 } from 'react-native'
 import Colors from '../../constants/colors'
 
 export default function NumberContainer({ children }) {
+  const { height, width } = useWindowDimensions()
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          padding: width > 700 ? 12 : 24,
+          marginBottom: width > 700 ? 0 : 24,
+        },
+      ]}
+    >
       <Text style={styles.numberText}>{children}</Text>
     </View>
   )

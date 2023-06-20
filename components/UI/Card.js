@@ -1,9 +1,14 @@
-import { StyleSheet, View } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from 'react-native'
 import Colors from '../../constants/colors'
 import { Dimensions } from 'react-native'
 
 export default function Card({ children }) {
-  return <View style={styles.card}>{children}</View>
+  const { height, width } = useWindowDimensions()
+  return <View style={[styles.card]}>{children}</View>
 }
 
 const deviceWidth = Dimensions.get('window').width
